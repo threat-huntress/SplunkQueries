@@ -1,0 +1,2 @@
+index=* sourcetype=* (parent_process_path="*elevation_service.exe" ("SYSTEM " OR "S-1-5-18")) 
+| stats values(_time) as eventTimes, values(parent_process_path) as parentProcessPaths, values(process_cmdline) as commandLines count by process_path, hostname| convert ctime(eventTimes)
