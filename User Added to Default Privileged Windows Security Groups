@@ -1,0 +1,4 @@
+index=<your_index> source="WinEventLog:Security" EventCode=4728 TargetDomainName="YOUR_DOMAIN_NAME" TargetUserName="*" MemberSid="*"
+| table _time, EventCode, TargetUserName, TargetDomainName, MemberSid
+| eval SecurityGroup=mvindex(split(TargetUserName, "\\"), 1)
+| search SecurityGroup="Administrators" OR SecurityGroup="Domain Admins" OR SecurityGroup="Enterprise Admins" OR SecurityGroup="Schema Admins" OR SecurityGroup="Account Operators" OR SecurityGroup="Backup Operators" OR SecurityGroup="Print Operators" OR SecurityGroup="Server Operators"
